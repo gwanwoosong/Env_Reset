@@ -16,6 +16,7 @@ We present a cost-effective pretraining paradigm for VLA models using only synth
 ![teaser](./figs/teaser.jpg)
 
 ## Latest Updates
+- [2025-12-29] 🎉🎉🎉 We release [StereoVLA](https://shengliangd.github.io/StereoVLA-Webpage/), a VLA model powered by stereo vision and supports flexible deployment with high tolerance to camera pose variations.
 - [2025-07-25] Release the GraspVLA model, [simulation playground](https://github.com/MiYanDoris/GraspVLA-playground) and [real world control interface](https://github.com/MiYanDoris/GraspVLA-real-world-controller).
 - [2025-07-19] Release the [supplementary material](https://arxiv.org/pdf/2505.03233).
 
