@@ -101,7 +101,7 @@ def main():
             Yc = (v - intr[1, 2]) * g_cfg['grasp_z'] / intr[1, 1]
             p_base = (ext @ np.array([Xc, Yc, g_cfg['grasp_z'], 1.0]))[:3]
 
-
+            home_pose = cfg["poses"]['middle_view']
             grasp_pose = [
                 g_cfg['base_x'] + p_base[1] + t_cfg['edge_offset_y'], 
                 p_base[0] + t_cfg['edge_offset_x'], 
@@ -109,9 +109,12 @@ def main():
                 *cfg['poses']['top_view'][3:]
             ]
 
+            
+
+
             run(env, grasp_pose, duration=2.0, grp=False)
             run(env, grasp_pose, duration=2.0, grp=True)
-
+            
 
             if t_cfg['action_type'] == "unfold":
                 execute_unfold(env, grasp_pose)
@@ -120,8 +123,18 @@ def main():
                 execute_fling(env)
             
             elif t_cfg['action_type'] == "place":
+                run(env, home_pose, duration=2.0, grp=True)
+                base_xy = np.array([0.3850, -0.15])
+                noise_xy = np.random.normal(0, 0.01, size=2)
 
-                place_pose = [grasp_pose[0], grasp_pose[1] + g_cfg['place_x_shift'], g_cfg['place_z'], *cfg['poses']['top_view'][3:]]
+                xy = base_xy + noise_xy
+
+                place_pose = [
+                    xy[0], xy[1], 0.19,
+                    -3.135387735082638,
+                    0.0117385168564208,
+                    -0.008736370437155985
+                ]
                 run(env, place_pose, duration=2.0, grp=True)
                 run(env, place_pose, duration=1.0, grp=False)
 
