@@ -1,7 +1,7 @@
-# 환경 초기화 프로그램 (Environment_Reset)
+# 환경 초기화 프로그램
 
 
-## 1. 설치 가이드 (Installation)
+## 1. 설치 가이드
 
 ### SAM3 설정
 
@@ -46,7 +46,7 @@ pip install -e .
 
 
 
-## 2. 환경 설정 (Environment Setting)
+## 2. 환경 설정
 프로그램을 실행하기 전, 로봇이 카메라를 정상적으로 인식하는지 확인해야 합니다. 아래 코드를 실행하여 연결된 카메라의 키(ID) 값을 확인하십시오.
 ``` python
 from droid.robot_env import RobotEnv
@@ -54,7 +54,7 @@ env = RobotEnv(camera_kwargs=dict(hand_camera=dict(image=True, resolution=(1280,
 print("사용 가능한 카메라 키(ID):", env.get_observation()['image'].keys())
 ```
 
-## 3. 설정값 수정 (Values to Change)
+## 3. 설정값 수정
 config.yaml 파일을 열어 본인의 실험 환경에 맞춰 아래 파라미터들을 조정하십시오.
 
 * `base_x`: 로봇의 X축 기준 위치.
@@ -62,7 +62,7 @@ config.yaml 파일을 열어 본인의 실험 환경에 맞춰 아래 파라미�
 * `place_z`: 물체를 놓을 때의 안전 높이 (기본값: 0.185m). 
 * `edge_offset`: 수건 모서리 등을 잡기 위한 정교한 오프셋 조정.
 
-## 4. 실행 방법 (How to Run)
+## 4. 실행 방법
 설정이 완료되었다면 아래 명령어를 입력하여 프로그램을 실행합니다.
 ```
 python main.py
