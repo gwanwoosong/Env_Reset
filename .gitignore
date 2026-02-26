@@ -205,3 +205,25 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+# Anygrasp
+anygrasp_utils
+gsnet.so
+lib_cxx.so
+license/
+example_data/
+
+# Thirdparty
+thirdparty/anygrasp_sdk
+thirdparty/kaolin
+thirdparty/sam-3d-objects
+thirdparty/pytorch3d
+thirdparty/sam-3d-objects-single.yml
+thirdparty/sam3
+# etc
+etri_videos
+evaluation_logs
+log
+utils_0226
+droid

@@ -1,0 +1,30 @@
+camera:
+  primary_id: "14013996_left"
+  resolution: [1280, 720]
+
+global_params:
+  base_x: 0.4350
+  grasp_z: 0.19
+  place_z: 0.185
+  place_x_shift: 0.30
+
+# 태스크별 자동 프롬프트 및 액션 설정
+tasks:
+  teddy-bear:
+    prompt: "stuffed animal"
+    action_type: "place"
+    edge_offset_x: 0.0
+    edge_offset_y: 0.0
+  towel-flattening:
+    prompt: "towel"
+    action_type: "fling"
+    edge_offset_x: 0.0
+    edge_offset_y: 0.0
+  towel-folding:
+    prompt: "towel"
+    action_type: "unfold"
+    edge_offset_x: -0.1
+    edge_offset_y: 0.075
+
+poses:
+  top_view: [0.4350, 0.0, 0.75, -3.135387735082638, 0.0117385168564208, -0.008736370437155985]
