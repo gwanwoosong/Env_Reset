@@ -50,6 +50,9 @@ def load_safetensors(path: str) -> dict:
 
 
 def load_model(model: nn.Module, ckpt_path: str) -> nn.Module:
+    if "safetensors" not in ckpt_path:
+        ckpt_path=os.path.join(ckpt_path, "model.safetensors")
+        print("ckpt_path", ckpt_path)
     ckpt = load_safetensors(ckpt_path)
     model.load_state_dict(ckpt)
     return model
@@ -358,7 +361,8 @@ class VLAAgent():
         self, path: Optional[str]=None, exp_name: Optional[str]=None, iter: Optional[int] = None, device: str = "cuda:0", compile=False,
     ) -> Tuple[VLAModelConfig, VLADataConfig, VLA, DataPreprocessor]:
         # TODO: return cfg as a VLAConfig
-        cfg_path = os.path.join(os.path.dirname(path), '..', 'config.json')
+        cfg_path = os.path.join(os.path.dirname(path), 'config.json')
+        print("cfg_path: ",cfg_path)
         with open(cfg_path, "r", encoding="utf-8") as f:
             cfg = json.load(f)
         data_cfg = VLADataConfig.model_validate(cfg["data"])
@@ -377,7 +381,8 @@ class VLAAgent():
         data_cfg.image_transform = model.image_transform
         data_cfg.pred = model_cfg.pred
         preprocessor = DataPreprocessor(data_cfg)
-        preprocessor_path = os.path.join(os.path.dirname(path), '..', 'preprocessor.npz')
+
+        preprocessor_path = os.path.join(os.path.dirname(path), 'preprocessor.npz')
         preprocessor.load(np.load(preprocessor_path))
         return model_cfg, data_cfg, model, preprocessor
 

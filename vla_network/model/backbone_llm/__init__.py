@@ -25,7 +25,8 @@ class LLMBackbone(nn.Module):
         
         self.llm = config.model_cls.from_pretrained(
             "internlm/internlm2-1_8b",
-            attn_implementation=config.attn_implementation,
+            #attn_implementation=config.attn_implementation,
+            attn_implementation="eager",
             do_sample=False,
             temperature=1.0,
             top_p=1.0,
@@ -160,9 +161,27 @@ class LLMBackbone(nn.Module):
                 past_length = past_key_values[0][0].shape[2]
             else:
                 past_length = 0
+            print("attention_mask shape:", None if attention_mask is None else attention_mask.shape)
+            print("inputs_embeds shape:", inputs_embeds.shape)
+            print("past_length:", past_length)
+
+            if attention_mask is not None:
+                if attention_mask.dim() == 2:
+                    attn_mask = attention_mask[:, :past_length + inputs_embeds.shape[1]]
+                elif attention_mask.dim() == 4:
+                    attn_mask = attention_mask[
+                        :, :,
+                        past_length:past_length + inputs_embeds.shape[1],
+                        :past_length + inputs_embeds.shape[1]
+                    ]
+                else:
+                    raise ValueError(f"Unsupported attention_mask dim: {attention_mask.dim()}, shape={attention_mask.shape}")
+            else:
+                attn_mask = None
             outputs = self.llm(
                 inputs_embeds=inputs_embeds,
-                attention_mask=attention_mask[:, :, past_length:past_length+inputs_embeds.shape[1], :past_length+inputs_embeds.shape[1]] if attention_mask is not None else None,
+                #attention_mask=attention_mask[:, :, past_length:past_length+inputs_embeds.shape[1], :past_length+inputs_embeds.shape[1]] if attention_mask is not None else None,
+                attention_mask=attn_mask,
                 position_ids=position_ids[:, past_length:past_length+inputs_embeds.shape[1]] if attention_mask is not None else None,
                 past_key_values=past_key_values,
                 use_cache=True,
