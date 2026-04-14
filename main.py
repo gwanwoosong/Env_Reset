@@ -69,7 +69,10 @@ def main():
         gripper_action_space="position", 
         camera_kwargs=dict(hand_camera=dict(image=True, resolution=(W, H)))
     )
-
+    home_pose = cfg["poses"]['middle_view']
+    run(env, home_pose, duration=2.0, grp=False)
+    import sys
+    sys.exit()
     for i in range(iteration):
         run(env, cfg['poses']['top_view'], duration=2.0, grp=False)
         print(f"\n--- Cycle {i+1} | Task: {task_input} ---")
@@ -109,8 +112,8 @@ def main():
                 *cfg['poses']['top_view'][3:]
             ]
 
-            
-
+            run(env, home_pose, duration=2.0, grp=False)
+            import pdb; pdb.set_trace()
 
             run(env, grasp_pose, duration=2.0, grp=False)
             run(env, grasp_pose, duration=2.0, grp=True)

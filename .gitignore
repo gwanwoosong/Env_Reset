@@ -208,7 +208,10 @@ __marimo__/
 
 
 # Anygrasp
-anygrasp_utils
+anygrasp_utils/.TimeRecord
+anygrasp_utils/debug_pose*.png
+anygrasp_utils/
+*.png
 gsnet.so
 lib_cxx.so
 license/
