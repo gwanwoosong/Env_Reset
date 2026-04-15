@@ -9,7 +9,7 @@ import numpy as np
 
 
 # =============================================================================
-# Camera Intrinsics (RealSense, 1280x720)
+# Camera Intrinsics (ZED, 1280x720)
 # =============================================================================
 CAMERA_INTRINSICS = dict(
     fx=732.277771,
@@ -18,7 +18,7 @@ CAMERA_INTRINSICS = dict(
     cy=352.48422241,
 )
 CAMERA_RESOLUTION = (1280, 720)
-CAMERA_ID = "14013996_left"
+CAMERA_ID = "11049903_left"
 DEPTH_SCALE = 1000.0  # depth image unit: mm -> m
 
 # =============================================================================
